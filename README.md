@@ -1,31 +1,45 @@
-# React Weather App
-This is a web app developed as a final year project in IIIT Allahabad React using React.js. It allows users to search for the weather conditions of any city in the world and provides current weather information. The app fetches weather data using the OpenWeather API.
-# Features
-- Users can search for weather conditions of any city in the world.
-- The app displays the current weather conditions, including temperature and weather description.
-- The app utilizes the  OpenWeather API to fetch weather data.
+# Mausam App 🌤️
 
-# Technologies & Tools Used
-- React.js
-- HTML
-- CSS
-- JavaScript
-- OpenWeather API
+A premium, React-based weather application featuring a stunning dark mode interface, 3D-style glassmorphism effects, and automatic location detection.
 
-# Installation and Usage
-To use this app, you can follow these steps:
+**Live Demo:** [https://mausam-app-v1.netlify.app/](https://mausam-app-v1.netlify.app/)
 
-- Clone the repository or download the source code.
-- Open the project in your preferred code editor.
-- Run  `npm install` to install the necessary dependencies.
-- Run `npm start` to start the development server.
-- Open your browser and navigate to `http://localhost:3000` to use the app.
+## ✨ Features
 
-To use the app, simply type the name of the city you want to search for in the search bar and press Enter. The app will display the current weather conditions for the searched city.
+- **Dark Mode UI**: A sophisticated, animated gradient background with mesh effects.
+- **Glassmorphism Design**: Frosted glass cards and UI elements for a modern, 3D aesthetic.
+- **Live Search**: Search for weather conditions in any city worldwide.
+- **Automatic Location Detection**: Detects your current location (via browser Geolocation) to fetch accurate local weather with one click.
+- **5-Day Forecast**: View detailed forecast data including temperature highs/lows and conditions.
+- **Interactive Elements**: 3D tilt effects on forecast cards and smooth animations.
+- **Responsive**: Fully optimized for desktop, tablet, and mobile devices.
 
-# Demo
-A live demo of the React Weather App is available at [LINK TO LIVE DEMO](https://meek-cajeta-2eb2bb.netlify.app/).
+## 🛠️ Tech Stack
 
-# Credits
-- The weather app was created by [Harendra Singh](https://github.com/Harendrasingh1) as a final year project in IIIT Allahabad.
-- The app uses the SheCodes Weather API to retrieve weather data.
+- **React.js**: Frontend framework (using Hooks & Functional Components).
+- **CSS3**: Custom variables, Grid/Flexbox, and Animations.
+- **Axios**: For fetching weather data.
+- **React Animated Weather**: For beautiful, animated weather icons.
+- **SheCodes Weather API**: Data provider for current weather and forecasts.
+
+## 🚀 Getting Started
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Harendrasingh1/Mausam-App.git
+    ```
+2.  **Install dependencies:**
+    ```bash
+    cd Mausam-App
+    npm install
+    ```
+3.  **Start the app:**
+    ```bash
+    npm start
+    ```
+
+## 👨‍💻 Credits
+
+Coded by **Harendra Singh**
+- [LinkedIn](https://www.linkedin.com/in/harendra8587/)
+- [GitHub](https://github.com/Harendrasingh1)
