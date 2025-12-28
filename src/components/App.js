@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchEngine from "./SearchEngine";
 import Forecast from "./Forecast";
+import Header from "./Header";
+import Footer from "./Footer";
 
 import "../styles.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -44,39 +46,60 @@ function App() {
       }`;
     return date;
   };
-  //new search function
+  const [errorMsg, setErrorMsg] = useState("");
+
   const search = async (event) => {
     event.preventDefault();
     if (event.type === "click" || (event.type === "keypress" && event.key === "Enter")) {
-      setWeather({ ...weather, loading: true });
+      if (!query) {
+        setErrorMsg("Please fill the city name");
+        return;
+      }
+      setErrorMsg("");
+      setWeather({ ...weather, loading: true, error: false });
       const apiKey = "b03a640e5ef6980o4da35b006t5f2942";
       const url = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}`;
-
-      await axios
-        .get(url)
-        .then((res) => {
-          console.log("res", res);
-          setWeather({ data: res.data, loading: false, error: false });
-        })
-        .catch((error) => {
-          setWeather({ ...weather, data: {}, error: true });
-          console.log("error", error);
-        });
+      await fetchWeatherData(url);
+      setQuery("");
     }
+  };
+
+  const searchByLocation = (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+    setWeather({ ...weather, loading: true, error: false });
+    navigator.geolocation.getCurrentPosition((position) => {
+      const apiKey = "b03a640e5ef6980o4da35b006t5f2942";
+      const lon = position.coords.longitude;
+      const lat = position.coords.latitude;
+      const url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}`;
+      fetchWeatherData(url);
+      setQuery("");
+    });
+  };
+
+  const fetchWeatherData = async (url) => {
+    await axios
+      .get(url)
+      .then((res) => {
+        if (res.data.status === "not_found") {
+          setWeather({ data: {}, loading: false, error: true });
+        } else {
+          setWeather({ data: res.data, loading: false, error: false });
+        }
+        setErrorMsg("");
+      })
+      .catch((error) => {
+        setWeather({ data: {}, loading: false, error: true });
+        setErrorMsg("");
+      });
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const apiKey = "b03a640e5ef6980o4da35b006t5f2942";
-      const url = `https://api.shecodes.io/weather/v1/current?query=Rabat&key=${apiKey}`;
-
-      try {
-        const response = await axios.get(url);
-        setWeather({ data: response.data, loading: false, error: false });
-      } catch (error) {
-        setWeather({ data: {}, loading: false, error: true });
-        console.log("error", error);
-      }
+      const url = `https://api.shecodes.io/weather/v1/current?query=Agra&key=${apiKey}`;
+      fetchWeatherData(url);
     };
 
     fetchData();
@@ -84,34 +107,34 @@ function App() {
 
   return (
     <div className="App">
-
+      <Header />
       {/* SearchEngine component */}
-      <SearchEngine query={query} setQuery={setQuery} search={search} />
+      <SearchEngine query={query} setQuery={setQuery} search={search} searchByLocation={searchByLocation} />
+
+      {errorMsg && (
+        <div className="validation-error">
+          {errorMsg}
+        </div>
+      )}
 
       {weather.loading && (
-        <>
-          <br />
-          <br />
+        <div className="loader">
           <h4>Searching..</h4>
-        </>
+        </div>
       )}
 
       {weather.error && (
-        <>
-          <br />
-          <br />
-          <span className="error-message">
-            <span style={{ fontFamily: "font" }}>
-              Sorry city not found, please try again.
-            </span>
-          </span>
-        </>
+        <div className="error-card">
+          <i className="fas fa-exclamation-circle"></i>
+          <p>City Not Found. Please Try with Another City</p>
+        </div>
       )}
 
       {weather && weather.data && weather.data.condition && (
         // Forecast component
         <Forecast weather={weather} toDate={toDate} />
       )}
+      <Footer />
     </div>
   );
 }

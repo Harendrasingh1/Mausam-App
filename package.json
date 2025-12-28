@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
@@ -16,6 +17,7 @@
     "@react-icons/all-files": "^4.1.0",
     "axios": "^1.7.3",
     "csbbust": "1.0.1",
+    "framer-motion": "^12.23.26",
     "loader-utils": "3.2.1",
     "react": "18.2.0",
     "react-animated-icons": "^1.0.0",

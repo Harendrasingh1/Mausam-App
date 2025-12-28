@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchEngine({ query, setQuery, search }) {
+function SearchEngine({ query, setQuery, search, searchByLocation }) {
   //handler function
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -20,6 +20,9 @@ function SearchEngine({ query, setQuery, search }) {
         onKeyPress={handleKeyPress}
       />
       <button onClick={search}><i className="fas fa-search" style={{ fontSize: "18px" }}></i></button>
+      <button onClick={searchByLocation} title="Current Location">
+        <i className="fas fa-map-marker-alt" style={{ fontSize: "18px" }}></i>
+      </button>
     </div>
   );
 }

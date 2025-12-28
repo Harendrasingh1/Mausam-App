@@ -10,7 +10,13 @@ function Forecast({ weather }) {
   useEffect(() => {
     const fetchForecastData = async () => {
       const apiKey = "b03a640e5ef6980o4da35b006t5f2942";
-      const url = `https://api.shecodes.io/weather/v1/forecast?query=${data.city}&key=${apiKey}&units=metric`;
+      let url;
+
+      if (data.coordinates) {
+        url = `https://api.shecodes.io/weather/v1/forecast?lon=${data.coordinates.longitude}&lat=${data.coordinates.latitude}&key=${apiKey}&units=metric`;
+      } else {
+        url = `https://api.shecodes.io/weather/v1/forecast?query=${data.city}&key=${apiKey}&units=metric`;
+      }
 
       try {
         const response = await axios.get(url);
@@ -21,7 +27,7 @@ function Forecast({ weather }) {
     };
 
     fetchForecastData();
-  }, [data.city]);
+  }, [data.city, data.coordinates]);
 
   const formatDay = (dateString) => {
     const options = { weekday: "short" };
@@ -86,18 +92,18 @@ function Forecast({ weather }) {
       <p className="weather-des">{data.condition.description}</p>
       <div className="weather-info">
         <div className="col">
-          <ReactAnimatedWeather icon="WIND" size="40"/>
+          <ReactAnimatedWeather icon="WIND" color="white" size={40} />
           <div>
             <p className="wind">{data.wind.speed}m/s</p>
             <p>Wind speed</p>
           </div>
         </div>
         <div className="col">
-          <ReactAnimatedWeather icon="RAIN" size="40"/>
+          <ReactAnimatedWeather icon="RAIN" color="white" size={40} />
           <div>
             <p className="humidity">{data.temperature.humidity}%</p>
             <p>Humidity</p>
-        </div>
+          </div>
         </div>
       </div>
       <div className="forecast">
@@ -123,6 +129,6 @@ function Forecast({ weather }) {
       </div>
     </div>
   );
-}        
+}
 
 export default Forecast;
