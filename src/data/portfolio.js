@@ -30,5 +30,17 @@ export const portfolioData = {
                 home: "Agra, India"
             }
         }
+    },
+    about: {
+        name: "Harendra Singh",
+        role: "Software Engineer",
+        description: "I am a Software Engineer at Urban Company and a Competitive Programmer. I specialize in building scalable web applications using the MERN stack and have a strong foundation in Microservices and distributed systems and algorithms.",
+        highlights: [
+            "Software Engineer at Urban Company",
+            "Expert on Codeforces (1617)",
+            "5 Star on CodeChef (2033)",
+            "B.Tech IIIT Allahabad (8.07 CGPA)"
+        ],
+        image: "my.jpeg"
     }
 };
